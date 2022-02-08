@@ -1,13 +1,16 @@
 import pandas as pd
 import streamlit as st
+import numpy as np
 
-st.title("Welcome to Streamlit!")
+dataframe = pd.read_csv('dataset.csv')
 
-st.write("Our first DataFrame")
+st.set_page_config(page_title='Covid 19 in Malaysia', page_icon=None, layout="wide",
+                   initial_sidebar_state="auto", menu_items=None)
 
-st.write(
-  pd.DataFrame({
-      'A': [1, 2, 3, 4],
-      'B': [5, 6, 7, 8]
-    })
-)
+st.title("A comprehensive study of Covid 19 cases in Malaysia")
+
+st.write("The Dataset we're working with")
+#showing our initial dataframe here
+dataframe
+
+st.write('## Questions and answers')
