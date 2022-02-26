@@ -1,11 +1,4 @@
-from re import S
-import pandas as pd
-import streamlit as st
-import numpy as np
-
-def app():
-    st.write("### 12. Create a K-Nearest Neighbour model.")
-    import imp
+import imp
 from re import S
 import pandas as pd
 import streamlit as st
@@ -27,7 +20,7 @@ X = df1.drop("ICU", 1)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)
 
 def app():
-    st.write("### Create a Random Forest model.")
+    st.write("### Create a K-Nearest Neighbour model.")
     st.write("#### Please select Number of Neighbors for your K-Nearest Neighbor Classifier: ")
     n_neighbors = st.slider('Number of Neighbors (n_neighbors)', 1, 6, (1,2), 1)
     #st.write(n_estimator[1])
