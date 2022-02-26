@@ -12,7 +12,7 @@ from sklearn.metrics import roc_curve
 from sklearn.metrics import roc_auc_score
 from sklearn.metrics import precision_recall_curve
 
-df1 = pd.read_csv('cleaned.csv')
+df1 = pd.read_csv('cleaned.csv', index_col=0)
 
 y = df1.ICU
 X = df1.drop("ICU", 1)
