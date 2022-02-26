@@ -20,5 +20,4 @@ def app():
     st.dataframe(rfe['Features'])
     st.write('Following is the top n features accuracy using RFE')
     st.dataframe(pd.read_csv('RFE_Accuracy.csv'))
-    st.image('Q9_boruta.png')
     st.image('Q9_rfe.png')
