@@ -29,51 +29,156 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_
 def app():
     st.write("### Create a Random Forest model.")
     st.write("#### Please select Number of Neighbors for your K-Nearest Neighbor Classifier: ")
-    n_neighbors = st.slider('Number of Neighbors (n_neighbors)', 0, 10, (0,2), 2)
+    n_neighbors = st.slider('Number of Neighbors (n_neighbors)', 1, 6, (1,2), 1)
     #st.write(n_estimator[1])
-
     st.warning("It may take some time to train the model :) Please patiently wait!")
-    KNN = KNeighborsClassifier(n_neighbors=n_neighbors[1])
-    KNN.fit(X_train, y_train)
-    y_pred = KNN.predict(X_test)
 
-    st.write("#### Results of the selected hyperparameters : ")
-    st.write("Accuracy on training set: {:.3f}".format(KNN.score(X_train, y_train)))
-    st.write("Accuracy on test set: {:.3f}".format(KNN.score(X_test, y_test)))
+    if n_neighbors[1] == 2:
+        accuracy = pd.read_csv('2_KNN_Accuracy.csv')
+        st.write("#### Results of the selected hyperparameters : ")
+        st.write("Accuracy on training set: {:.3f}".format(accuracy['Accuracy'][0]))
+        st.write("Accuracy on test set: {:.3f}".format(accuracy['Accuracy'][1]))
 
-    #Confusion Matrix
-    confusion_majority = confusion_matrix(y_test, y_pred)
+        #Confusion Matrix
+        confusion = pd.read_csv('2_KNN_Confusion.csv')
+        #st.write('Mjority classifier Confusion Matrix\n', confusion_majority)
 
-    st.write('Mjority classifier Confusion Matrix\n', confusion_majority)
+        st.write('**********************')
+        st.write('Mjority TN= ', confusion['Score'][0])
+        st.write('Mjority FP=', confusion['Score'][1])
+        st.write('Mjority FN= ', confusion['Score'][2])
+        st.write('Mjority TP= ', confusion['Score'][3])
+        st.write('**********************')
 
-    st.write('**********************')
-    st.write('Mjority TN= ', confusion_majority[0][0])
-    st.write('Mjority FP=', confusion_majority[0][1])
-    st.write('Mjority FN= ', confusion_majority[1][0])
-    st.write('Mjority TP= ', confusion_majority[1][1])
-    st.write('**********************')
+        st.write('Precision= {:.2f}'.format(confusion['Score'][4]))
+        st.write('Recall= {:.2f}'.format(confusion['Score'][5]))
+        st.write('F1= {:.2f}'. format(confusion['Score'][6]))
+        st.write('Accuracy= {:.2f}'.format(confusion['Score'][7]))
 
-    st.write('Precision= {:.2f}'.format(precision_score(y_test, y_pred)))
-    st.write('Recall= {:.2f}'. format(recall_score(y_test, y_pred)))
-    st.write('F1= {:.2f}'. format(f1_score(y_test, y_pred)))
-    st.write('Accuracy= {:.2f}'. format(accuracy_score(y_test, y_pred)))
+        auc = pd.read_csv('2_KNN_AUC.csv')
+        #AUC
+        st.write('AUC: %.2f' % auc['Score'][0])
 
-    #AUC
-    prob_KNN = KNN.predict_proba(X_test)
-    prob_KNN = prob_KNN[:, 1]
+        #plt.legend()
 
-    auc_KNN= roc_auc_score(y_test, prob_KNN)
-    st.write('AUC: %.2f' % auc_KNN)
+        st.image('2_KNN_Q12_roc.png')
 
-    fpr_KNN, tpr_KNN, thresholds_KNN = roc_curve(y_test, prob_KNN) 
+    if n_neighbors[1] == 3:
+        accuracy = pd.read_csv('3_KNN_Accuracy.csv')
+        st.write("#### Results of the selected hyperparameters : ")
+        st.write("Accuracy on training set: {:.3f}".format(accuracy['Accuracy'][0]))
+        st.write("Accuracy on test set: {:.3f}".format(accuracy['Accuracy'][1]))
 
-    plt.plot(fpr_KNN, tpr_KNN, color='red', label='KNN') 
-    plt.plot([0, 1], [0, 1], color='green', linestyle='--')
-    plt.xlabel('False Positive Rate')
-    plt.ylabel('True Positive Rate')
-    plt.title('Receiver Operating Characteristic (ROC) Curve')
-    #plt.legend()
+        #Confusion Matrix
+        confusion = pd.read_csv('3_KNN_Confusion.csv')
+        #st.write('Mjority classifier Confusion Matrix\n', confusion_majority)
 
-    plt.savefig('KNN_ROC.png')
+        st.write('**********************')
+        st.write('Mjority TN= ', confusion['Score'][0])
+        st.write('Mjority FP=', confusion['Score'][1])
+        st.write('Mjority FN= ', confusion['Score'][2])
+        st.write('Mjority TP= ', confusion['Score'][3])
+        st.write('**********************')
 
-    st.image('KNN_ROC.png')
+        st.write('Precision= {:.2f}'.format(confusion['Score'][4]))
+        st.write('Recall= {:.2f}'.format(confusion['Score'][5]))
+        st.write('F1= {:.2f}'. format(confusion['Score'][6]))
+        st.write('Accuracy= {:.2f}'.format(confusion['Score'][7]))
+
+        auc = pd.read_csv('3_KNN_AUC.csv')
+        #AUC
+        st.write('AUC: %.2f' % auc['Score'][0])
+
+        #plt.legend()
+
+        st.image('3_KNN_Q12_roc.png')
+    
+    if n_neighbors[1] == 4:
+        accuracy = pd.read_csv('4_KNN_Accuracy.csv')
+        st.write("#### Results of the selected hyperparameters : ")
+        st.write("Accuracy on training set: {:.3f}".format(accuracy['Accuracy'][0]))
+        st.write("Accuracy on test set: {:.3f}".format(accuracy['Accuracy'][1]))
+
+        #Confusion Matrix
+        confusion = pd.read_csv('4_KNN_Confusion.csv')
+        #st.write('Mjority classifier Confusion Matrix\n', confusion_majority)
+
+        st.write('**********************')
+        st.write('Mjority TN= ', confusion['Score'][0])
+        st.write('Mjority FP=', confusion['Score'][1])
+        st.write('Mjority FN= ', confusion['Score'][2])
+        st.write('Mjority TP= ', confusion['Score'][3])
+        st.write('**********************')
+
+        st.write('Precision= {:.2f}'.format(confusion['Score'][4]))
+        st.write('Recall= {:.2f}'.format(confusion['Score'][5]))
+        st.write('F1= {:.2f}'. format(confusion['Score'][6]))
+        st.write('Accuracy= {:.2f}'.format(confusion['Score'][7]))
+
+        auc = pd.read_csv('4_KNN_AUC.csv')
+        #AUC
+        st.write('AUC: %.2f' % auc['Score'][0])
+
+        #plt.legend()
+
+        st.image('4_KNN_Q12_roc.png')
+    
+    if n_neighbors[1] == 5:
+        accuracy = pd.read_csv('5_KNN_Accuracy.csv')
+        st.write("#### Results of the selected hyperparameters : ")
+        st.write("Accuracy on training set: {:.3f}".format(accuracy['Accuracy'][0]))
+        st.write("Accuracy on test set: {:.3f}".format(accuracy['Accuracy'][1]))
+
+        #Confusion Matrix
+        confusion = pd.read_csv('5_KNN_Confusion.csv')
+        #st.write('Mjority classifier Confusion Matrix\n', confusion_majority)
+
+        st.write('**********************')
+        st.write('Mjority TN= ', confusion['Score'][0])
+        st.write('Mjority FP=', confusion['Score'][1])
+        st.write('Mjority FN= ', confusion['Score'][2])
+        st.write('Mjority TP= ', confusion['Score'][3])
+        st.write('**********************')
+
+        st.write('Precision= {:.2f}'.format(confusion['Score'][4]))
+        st.write('Recall= {:.2f}'.format(confusion['Score'][5]))
+        st.write('F1= {:.2f}'. format(confusion['Score'][6]))
+        st.write('Accuracy= {:.2f}'.format(confusion['Score'][7]))
+
+        auc = pd.read_csv('5_KNN_AUC.csv')
+        #AUC
+        st.write('AUC: %.2f' % auc['Score'][0])
+
+        #plt.legend()
+
+        st.image('5_KNN_Q12_roc.png')
+
+    if n_neighbors[1] == 6:
+        accuracy = pd.read_csv('6_KNN_Accuracy.csv')
+        st.write("#### Results of the selected hyperparameters : ")
+        st.write("Accuracy on training set: {:.3f}".format(accuracy['Accuracy'][0]))
+        st.write("Accuracy on test set: {:.3f}".format(accuracy['Accuracy'][1]))
+
+        #Confusion Matrix
+        confusion = pd.read_csv('6_KNN_Confusion.csv')
+        #st.write('Mjority classifier Confusion Matrix\n', confusion_majority)
+
+        st.write('**********************')
+        st.write('Mjority TN= ', confusion['Score'][0])
+        st.write('Mjority FP=', confusion['Score'][1])
+        st.write('Mjority FN= ', confusion['Score'][2])
+        st.write('Mjority TP= ', confusion['Score'][3])
+        st.write('**********************')
+
+        st.write('Precision= {:.2f}'.format(confusion['Score'][4]))
+        st.write('Recall= {:.2f}'.format(confusion['Score'][5]))
+        st.write('F1= {:.2f}'. format(confusion['Score'][6]))
+        st.write('Accuracy= {:.2f}'.format(confusion['Score'][7]))
+
+        auc = pd.read_csv('6_KNN_AUC.csv')
+        #AUC
+        st.write('AUC: %.2f' % auc['Score'][0])
+
+        #plt.legend()
+
+        st.image('6_KNN_Q12_roc.png')
