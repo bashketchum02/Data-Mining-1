@@ -1,33 +1,14 @@
+import pandas as pd
+import streamlit as st   
 from re import S
 import pandas as pd
 import streamlit as st
 import numpy as np
-
-def app():
-    st.write("### 12. Create a K-Nearest Neighbour model.")
-    import imp
-from re import S
-import pandas as pd
-import streamlit as st
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.model_selection import train_test_split
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.metrics import confusion_matrix
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
-from sklearn.metrics import roc_curve
-from sklearn.metrics import roc_auc_score
-from sklearn.metrics import precision_recall_curve
 
 df1 = pd.read_csv('cleaned.csv')
 
-y = df1.ICU
-X = df1.drop("ICU", 1)
-
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)
-
 def app():
-    st.write("### Create a Random Forest model.")
+    st.write("### 12. Create a K-Nearest Neighbour model.")
     st.write("#### Please select Number of Neighbors for your K-Nearest Neighbor Classifier: ")
     n_neighbors = st.slider('Number of Neighbors (n_neighbors)', 1, 6, (1,2), 1)
     #st.write(n_estimator[1])
